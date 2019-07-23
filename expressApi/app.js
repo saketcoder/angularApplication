@@ -6,23 +6,6 @@ const app = express();
 const mongoose = require('mongoose');
 // connect the mongoose to the database
 mongoose.connect('mongodb://localhost/mydb',{ useNewUrlParser: true });
-const multer = require('multer');
-var uploaded = 'http://localhost:4500/profileImages/';
-var imageUrl = '';
-// multer storage configuration
-const storge = multer.diskStorage({
-    destination: function(req,file,cb){
-        cb(null,'profileImages/')
-    },
-    filename:function (req,file,cb){
-        let fname = Date.now() + Path.extname(file.originalname);
-        imageUrl = uploaded + fname;
-        cb(null,fname);
-    }
-});
-// multer object is created to manage file uploads. 
-var upload = multer({storage:storage});
-
 // Define a Model for each collection of the database.
 const User = mongoose.model('users',{
     name: String,
